@@ -37,8 +37,6 @@ services:
 
 docker-compose.yml example with single user and password for all databases:
 
-docker-compose.yml example with different users and passwords:
-
 ```yml
 version: "3.5"
 services:
