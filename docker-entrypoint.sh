@@ -68,7 +68,7 @@ if [ -n "$PG_DATABASES" ]; then
         read -r -a array_users <<< "$PG_USERS"
         read -r -a array_passwords <<< "$PG_PASSWORDS"
         if [ "${#array_databases[@]}" -eq "${#array_users[@]}" ] && [ "${#array_databases[@]}" -eq "${#array_passwords[@]}" ]; then
-            if [ -n "$PG_SUPERUSER" ]; && [ "$PG_SUPERUSER" -eq "Y" ]; then
+            if [ -n "$PG_SUPERUSER" ] && [ "$PG_SUPERUSER" -eq "Y" ]; then
                 for key in "${!array_databases[@]}"; do
                     create_databases_and_superusers "${array_databases[$key]}" "${array_users[$key]}" "${array_passwords[$key]}"
                 done
@@ -78,7 +78,7 @@ if [ -n "$PG_DATABASES" ]; then
                 done
             fi
         elif [ "${#array_users[@]}" -eq 1 ] && [ "${#array_passwords[@]}" -eq 1 ]; then
-            if [ -n "$PG_SUPERUSER" ]; && [ "$PG_SUPERUSER" -eq "Y" ]; then
+            if [ -n "$PG_SUPERUSER" ] && [ "$PG_SUPERUSER" -eq "Y" ]; then
                 create_superuser "${array_users[0]}" "${array_passwords[0]}"
             else
                 create_user "${array_users[0]}" "${array_passwords[0]}"
