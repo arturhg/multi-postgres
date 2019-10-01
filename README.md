@@ -5,7 +5,7 @@ Based on [postgres:12-alpine](https://github.com/docker-library/postgres/blob/66
 
 Either provide the same number of databases, users and passwords or only one user and one password for all databases.
 
-To create superuser(s) instead of user(s), set ```PG_SUPERUSER=Y``` environment variable.
+To install extensions, set ```PG_EXTENSIONS=extension_1,extension_2,..., extension_n``` environment variable.
 
 To use this image add the following environment variables (for different users and passwords):
 
