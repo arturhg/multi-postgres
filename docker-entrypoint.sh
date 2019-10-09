@@ -47,10 +47,10 @@ EOSQL
 }
 
 if [ -n "$PG_DATABASES" ]; then
-    IFS=', ' read -r -a array_databases <<< "$PG_DATABASES"
+    array_databases=($(echo "$PG_DATABASES" | tr  ',' '\n'))
     if [ -n "$PG_USERS" ]; then
-        read -r -a array_users <<< "$PG_USERS"
-        read -r -a array_passwords <<< "$PG_PASSWORDS"
+        array_users=($(echo "$PG_USERS" | tr  ',' '\n'))
+        array_passwords=($(echo "$PG_PASSWORDS" | tr  ',' '\n'))
         if [ "${#array_databases[@]}" -eq "${#array_users[@]}" ] && [ "${#array_databases[@]}" -eq "${#array_passwords[@]}" ]; then
             for key in "${!array_databases[@]}"; do
                 create_databases_and_users "${array_databases[$key]}" "${array_users[$key]}" "${array_passwords[$key]}"
@@ -63,7 +63,7 @@ if [ -n "$PG_DATABASES" ]; then
         fi
     fi
     if [ -n "$PG_EXTENSIONS" ]; then
-        read -r -a array_extensions <<< "$PG_EXTENSIONS"
+        array_extensions=($(echo "$PG_EXTENSIONS" | tr  ',' '\n'))
         for key in "${!array_databases[@]}"; do
             for key2 in "${!array_extensions[@]}"; do
                 install_extensions "${array_databases[$key]}" "${array_extensions[$key2]}"
